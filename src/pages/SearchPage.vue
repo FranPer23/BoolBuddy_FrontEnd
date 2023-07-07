@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     getProfiles() {
-      axios.get("http://127.0.0.1:8000/api/profiles").then((resp) => {
+      axios.get("http://localhost:8000/api/profiles").then((resp) => {
         this.profiles = resp.data.results.data;
         console.log(resp);
       });
