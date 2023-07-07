@@ -1,11 +1,19 @@
 <script>
 import axios from "axios";
+import ProfileCard from "../components/ProfileCard.vue";
+import { store } from "../store";
 
 export default {
   data() {
     return {
       profiles: [],
+      store,
     };
+  },
+
+  name: "SearchPage",
+  components: {
+    ProfileCard,
   },
   mounted() {
     this.getProfiles();
@@ -22,16 +30,16 @@ export default {
 </script>
 
 <template>
-  <h1>Hola</h1>
-  <!-- <a href="http://localhost:8000/">Hola!</a> -->
-  <ul>
-    <li v-for="profile in profiles">
-      {{ profile.name }}
-    </li>
-  </ul>
-  <router-view></router-view>;
+  <div class="container">
+    <h2 class="text-center">Profili:</h2>
+    <div class="row row-cols-3">
+      <div class="col g-4" v-for="profile in profiles">
+        <ProfileCard :profile="profile" />
+      </div>
+    </div>
+  </div>
 </template>
 
-<style lang="scss">
-// @use "./styles/general.scss" as *;
+<style scoped lang="scss">
+@use "../styles/general.scss" as *;
 </style>

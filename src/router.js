@@ -10,7 +10,8 @@ const router = createRouter({
             path: "/",
             name: "home",
             component: HomePage,
-        },
+        }, 
+     
         {
             path: "/profiles",
             name: "profiles",
@@ -21,6 +22,7 @@ const router = createRouter({
             name: "search",
             component: SearchPage,
         },
+       
         // {
         //     path: "/:pathMatch(.)",
         //     name: "notFound",
