@@ -2,6 +2,7 @@ import { createRouter,  createWebHistory } from "vue-router";
 import HomePage from "./pages/HomePage.vue";
 import ProfilesPage from "./pages/ProfilesPage.vue";
 import SearchPage from "./pages/SearchPage.vue";
+import SingleProfilePage from "./pages/SingleProfilepage.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -28,6 +29,12 @@ const router = createRouter({
         //     name: "notFound",
         //     component: NotFoundPage,
         // },
+        {
+            // passo un parametro al path, per visualizzare 1 singolo progetto
+            path: "/profiles/:id",
+            name: "single-profile",
+            component: SingleProfilePage,
+        },
     ],
 });
 

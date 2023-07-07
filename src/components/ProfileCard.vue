@@ -31,6 +31,11 @@ export default {
         </li>
       </ul>
     </div>
+    <router-link
+      :to="{ name: 'single-profile', params: { id: profile.id } }"
+      class="btn btn-primary"
+      >Dettagli</router-link
+    >
   </div>
 </template>
 
