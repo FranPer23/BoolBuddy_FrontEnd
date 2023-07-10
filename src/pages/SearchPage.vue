@@ -8,6 +8,7 @@ export default {
     return {
       profiles: [],
       store,
+      loading: false,
     };
   },
 
