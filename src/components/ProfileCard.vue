@@ -20,28 +20,140 @@ export default {
 </script>
 
 <template>
-  <div class="card p-2">
-    <img :src="imageUrl" alt="" />
-    <h5>Surname: {{ profile.surname }}</h5>
-    <h5>Name: {{ profile.name }}</h5>
-    <div class="text-primary">
-      <ul class="list-unstyled">
-        <li v-for="technology in profile.technology">
-          {{ technology.name }}
-        </li>
-      </ul>
+
+  <div class="ms_card mb-4">
+    <div class="card-inner">
+      <div class="card-front">
+        <div v-if="profile.photo">
+          <img :src="imageUrl" alt=""  />
+        </div>
+        <div v-else>
+          <img src="../assets/defaultimg/profilejpg.jpg" alt="" >
+        </div>
+      </div>
+      <div class="card-back">
+        <div class="ms_card-body mb-4">
+          <h2 class=" my-3"> {{ profile.surname }} {{ profile.name }}</h2>
+          <h5 class="text-uppercase mb-3">Technologies:</h5>
+          <div class="ms_technology_space">
+            <ul class="list-unstyled flex-wrap">
+              <li v-for="technology in profile.technology" class="col-6">
+                {{ technology.name }}
+              </li>
+            </ul>
+          </div>
+      </div>
+    <router-link :to="{ name: 'single-profile', params: { id: profile.id } }" class="ms_btn text-center align-self-center">
+      Details
+    </router-link>
+      </div>
     </div>
-    <router-link
-      :to="{ name: 'single-profile', params: { id: profile.id } }"
-      class="btn btn-primary"
-      >Dettagli</router-link
-    >
   </div>
 </template>
 
 <style lang="scss" scoped>
-.card,
-.col {
-  height: 100%;
+// STYLE
+img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+// CARD
+.ms_card {
+  height: 400px;
+  width: 400px;
+  perspective: 2500px;
+  cursor: pointer;
+}
+
+.card-inner {
+  width: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.999s;
+}
+
+.ms_card:hover .card-inner {
+  transform: rotateY(180deg);
+  font-weight: 700 !important;
+  background: none;
+  -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+  -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+  transition: all 0.3s ease 0s;
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  backface-visibility: hidden;
+}
+
+.card-front {
+  background-color: #3E444C;
+  display: flex;
+  align-items: center;
+  border: 3px solid #3E444C;
+  border-radius: 10px;
+  justify-content: center;
+  transform: rotateY(0deg);
+}
+
+.card-back {
+  background-color: #D1D8E0;
+  color: #0c2230;
+  display: flex;
+  padding: 1rem;
+  align-items: center;
+  border: 3px solid #3E444C;
+  border-radius: 10px;
+  justify-content: center;
+  transform: rotateY(180deg);
+}
+
+
+
+// button style
+.ms_technology_space {
+  font-size: 1rem;
+  height: 200px;
+  align-items: center;
+}
+
+.ms_btn {
+ width: 50%;
+ display: inline-block;
+ padding: 0.5rem .5rem;
+ font-size: 16px;
+ font-weight: 700;
+ color:  #0c2230;
+ border: 3px solid #0c2230;
+ cursor: pointer;
+ position: relative;
+ background-color: transparent;
+ text-decoration: none;
+ overflow: hidden;
+ z-index: 1;
+ font-family: inherit;
+}
+
+.ms_btn::before {
+ content: "";
+ position: absolute;
+ left: 0;
+ top: 0;
+ width: 100%;
+ height: 100%;
+ background-color: #F0F3F4;
+ transform: translateX(-100%);
+ transition: all .3s;
+ z-index: -1;
+}
+
+.ms_btn:hover::before {
+ transform: translateX(0);
 }
 </style>

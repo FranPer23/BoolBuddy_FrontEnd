@@ -30,16 +30,25 @@ export default {
 </script>
 
 <template>
-  <div class="container">
-    <h2 class="text-center">Profili:</h2>
-    <div class="row row-cols-3">
-      <div class="col g-4" v-for="profile in profiles">
-        <ProfileCard :profile="profile" />
+  <main>
+    <div class="container">
+      <div class="row row-cols-3">
+        <div class="col g-4" v-for="profile in profiles">
+          <ProfileCard :profile="profile" />
+        </div>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <style scoped lang="scss">
 @use "../styles/general.scss" as *;
+
+main{
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  background: #69788c;
+  background: -webkit-linear-gradient(58deg, #69788c 0%, #f0f3f4 100%);
+  background: linear-gradient(58deg, #69788c 0%, #f0f3f4 100%);
+}
 </style>
