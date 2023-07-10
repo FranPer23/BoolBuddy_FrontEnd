@@ -6,6 +6,12 @@ import 'vueperslides/dist/vueperslides.css'
 
 export default {
 
+  name: "HomePage",
+
+  props: {
+    profile: Object,
+  },
+
   components: {
     VueperSlides,
     VueperSlide,
@@ -16,6 +22,12 @@ export default {
       store,
       profiles: [],
     };
+  },
+
+  computed: {
+    imageUrl() {
+      return `${this.store.baseUrl}/storage${this.profile.photo}`;
+    },
   },
 
   methods: {
@@ -55,7 +67,7 @@ export default {
   <vueper-slides class="no-shadow" :visibleSlides="3" :slidePerView="1" :draggingDistance="70" :gap="5" :bullets="true"
     :arrows="false" :slideImageInside="true">
     <vueper-slide class="slide" v-for="profile in profiles" :key="user_id" :title="profile.name"
-      :content="profile.surname" :image="profile.photo">
+      :content="profile.surname">
     </vueper-slide>
   </vueper-slides>
 </template>
