@@ -46,13 +46,13 @@ export default {
 </script>
 
 <template>
-  <h2 class="text-center">Profili:</h2>
+  <h2 class="text-center">Profiles:</h2>
   <div class="container">
     <div class="col">
-      <label class="form-label" for="technology">Tecnologie</label>
+      <label class="form-label" for="technology">Technologies</label>
       <select v-model="this.store.selectedTechnology" id="technology" class="form-select w-100" @change="getProfiles()">
         <option selected value=""></option>
-        <option value="all">TUTTI</option>
+        <option value="all">ALL</option>
         <option v-for="technology_item in technologies" :key="technology_item.id" :value="technology_item.id">{{
           technology_item.name }}</option>
       </select>
@@ -68,7 +68,7 @@ export default {
 
     <template v-else>
       <p class="text-center text-uppercase py-3">
-        Nessuna tecnologia utilizzata
+        Technologies not found
       </p>
     </template>
   </div>
