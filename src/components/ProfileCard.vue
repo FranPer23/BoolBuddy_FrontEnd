@@ -80,8 +80,6 @@ h2 {
   transform: rotateY(180deg);
   font-weight: 700 !important;
   background: none;
-  -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
-  -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
   transition: all 0.3s ease 0s;
 }
 
