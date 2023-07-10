@@ -1,12 +1,24 @@
 <script>
 import axios from "axios";
+import ProfileCard from "../components/ProfileCard.vue";
 import { store } from "../store";
 import { VueperSlides, VueperSlide } from 'vueperslides';
-import 'vueperslides/dist/vueperslides.css'
+import 'vueperslides/dist/vueperslides.css';
+import { resolveDirective } from "vue";
+import { routerKey } from "vue-router";
 
 export default {
 
   name: "HomePage",
+
+  data() {
+    return {
+      store,
+      profiles: [],
+      technologies: [],
+      selectedTechnology: "",
+    };
+  },
 
   props: {
     profile: Object,
@@ -15,13 +27,7 @@ export default {
   components: {
     VueperSlides,
     VueperSlide,
-  },
-
-  data() {
-    return {
-      store,
-      profiles: [],
-    };
+    ProfileCard,
   },
 
   computed: {
@@ -30,18 +36,29 @@ export default {
     },
   },
 
+  mounted() {
+    this.getTechnologies();
+    this.getCarouselProfiles();
+  },
+
   methods: {
     getProfiles() {
+      this.store.selectedTechnology = this.selectedTechnology;
+      this.$router.push({ name: "search" });
+    },
+    getTechnologies() {
+      axios.get(`${this.store.baseUrl}/api/technologies`).then((resp) => {
+        this.technologies = resp.data.results;
+        console.log(resp.data.results);
+      })
+    },
+    getCarouselProfiles() {
       axios.get(`${this.store.baseUrl}/api/profiles`).then(
         (resp) => {
           this.profiles = resp.data.results.data;
         },
       );
     },
-  },
-
-  mounted() {
-    this.getProfiles();
   },
 
 };
@@ -61,6 +78,16 @@ export default {
         Find Your IT Specialist
       </h1>
 
+      <div class="col">
+        <label class="form-label" for="technology">Technologies</label>
+        <select v-model="selectedTechnology" id="technology" class="form-select w-50 m-auto" @change="getProfiles()">
+          <option selected value=""></option>
+          <option value="all">ALL</option>
+          <option v-for="technology_item in technologies" :key="technology_item.id" :value="technology_item.id">{{
+            technology_item.name }}</option>
+        </select>
+      </div>
+
     </div>
   </div>
   <!-- carousel made with vueperslides -->
@@ -73,5 +100,5 @@ export default {
 </template>
 
 <style lang="scss">
-@use '../assets/Style/AppHomePage.scss'
+@use '../assets/Style/AppHomePage.scss';
 </style>
