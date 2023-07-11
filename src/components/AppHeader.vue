@@ -52,10 +52,10 @@ export default {
           </ul>
           <ul class="navbar-nav d-flex justify-content-end w-50">
             <li class="me-3">
-              <a href="http://localhost:8000/login">Login</a>
+              <a href="http://localhost:3306/login">Login</a>
             </li>
             <li>
-              <a href="http://localhost:8000/register">Register</a>
+              <a href="http://localhost:3306/register">Register</a>
             </li>
           </ul>
         </div>
