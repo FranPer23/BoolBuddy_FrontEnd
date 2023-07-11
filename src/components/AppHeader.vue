@@ -40,7 +40,7 @@ export default {
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
+          <ul class="navbar-nav w-50">
             <li class="nav-item" v-for="item in menuItems">
               <router-link
                 :to="{ name: item.routeName }"
@@ -50,8 +50,23 @@ export default {
               >
             </li>
           </ul>
+          <ul class="navbar-nav d-flex justify-content-end w-50">
+            <li class="me-3">
+              <a href="http://localhost:8000/login">Login</a>
+            </li>
+            <li>
+              <a href="http://localhost:8000/register">Register</a>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
   </header>
 </template>
+<style lang="scss" scoped>
+
+a{
+  text-decoration: none;
+  color: inherit;
+}
+</style>

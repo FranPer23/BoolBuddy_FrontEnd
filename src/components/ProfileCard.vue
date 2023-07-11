@@ -54,7 +54,8 @@ export default {
 <style lang="scss" scoped>
 // STYLE
 img {
-  width: 100%;
+  width: 400px;
+  height: 400px;
   border-radius: 10px;
 }
 
