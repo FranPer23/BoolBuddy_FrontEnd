@@ -25,7 +25,7 @@ export default {
 
 <template>
   <header class="text-center p-2">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg">
       <div class="container">
         <a class="navbar-brand" href="#">BoolBuddy</a>
         <button
