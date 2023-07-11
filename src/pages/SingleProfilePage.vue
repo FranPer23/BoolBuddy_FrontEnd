@@ -55,6 +55,23 @@ export default {
         specialist_id: this.$route.params.id,
       };
 
+      const forms = document.querySelectorAll(".needs-validation");
+
+      Array.from(forms).forEach((form) => {
+        form.addEventListener(
+          "submit",
+          (event) => {
+            if (!form.checkValidity()) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+
+            form.classList.add("was-validated");
+          },
+          false
+        );
+      });
+
       axios
         .post(`${this.store.baseUrl}/api/messages`, message)
         .then(function (response) {
