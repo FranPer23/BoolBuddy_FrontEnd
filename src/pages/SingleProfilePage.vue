@@ -4,7 +4,7 @@ import { store } from "../store";
 
 export default {
   name: "SingleProfilePage",
-    props: {
+  props: {
     profile: Object,
   },
   data() {
@@ -12,6 +12,12 @@ export default {
       store,
       profile: null,
       errorMessage: "",
+      form: {
+        name: "",
+        surname: "",
+        email: "",
+        message: "",
+      },
     };
   },
   computed: {
@@ -40,9 +46,26 @@ export default {
     );
   },
   methods: {
-    // goBack() {
-    //     this.$router.go(-1);
-    // }
+    sendMessage() {
+      const message = {
+        name: this.form.name,
+        surname: this.form.surname,
+        email: this.form.email,
+        message: this.form.message,
+        specialist_id: this.$route.params.id,
+      };
+
+      axios
+        .post(`${this.store.baseUrl}/api/messages`, message)
+        .then(function (response) {
+          // Gestisci la risposta del server in caso di successo
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          // Gestisci gli errori in caso di fallimento della richiesta
+          console.error(error);
+        });
+    },
   },
 };
 </script>
@@ -61,22 +84,26 @@ export default {
               <img :src="imageUrl" alt="" />
             </div>
             <div v-else>
-              <img src="../assets/defaultimg/profilejpg.jpg" alt="" >
+              <img src="../assets/defaultimg/profilejpg.jpg" alt="" />
             </div>
           </div>
           <div class="profile_info text-center">
-            <h2 class="text-uppercase">{{ profile.surname }} {{ profile.name }}</h2>
-            <p class="mb-4"> {{ profile.field }}</p>
-            <hr>
-            <div> <i class="fa-solid fa-location-dot"></i> 
-            <p>
-              {{ profile.address }}, {{ profile.city }}
-            </p>
-          </div>
+            <h2 class="text-uppercase">
+              {{ profile.surname }} {{ profile.name }}
+            </h2>
+            <p class="mb-4">{{ profile.field }}</p>
+            <hr />
+            <div>
+              <i class="fa-solid fa-location-dot"></i>
+              <p>{{ profile.address }}, {{ profile.city }}</p>
+            </div>
             <div class="my-4">
               <div>
-                <i class="fa-solid fa-code"></i> 
-                <ul class="list-unstyled" v-for="(technology, index) in profile.technology">
+                <i class="fa-solid fa-code"></i>
+                <ul
+                  class="list-unstyled"
+                  v-for="(technology, index) in profile.technology"
+                >
                   <li>
                     {{ technology.name }}
                   </li>
@@ -90,15 +117,17 @@ export default {
               </p>
             </div>
             <span v-else></span>
-            <div v-if="profile.mobile"><i class="fa-solid fa-mobile"></i> 
+            <div v-if="profile.mobile">
+              <i class="fa-solid fa-mobile"></i>
               <p>
                 {{ profile.mobile }}
               </p>
             </div>
             <span v-else></span>
-            <div v-if="profile.service"> <i class="fa-solid fa-wrench"></i>
+            <div v-if="profile.service">
+              <i class="fa-solid fa-wrench"></i>
               <p>
-                {{ profile.service}}
+                {{ profile.service }}
               </p>
             </div>
             <span v-else></span>
@@ -108,13 +137,64 @@ export default {
           {{ errorMessage }}
         </div>
       </div>
-    </section>
 
+      <div class="form-container mt-3">
+        <form @submit.prevent="sendMessage">
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Email address*</label
+            >
+            <input
+              v-model="form.email"
+              type="email"
+              class="form-control"
+              id="exampleFormControlInput1"
+              placeholder="name@example.com"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="name" class="form-label">Name*</label>
+            <input
+              v-model="form.name"
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Name"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="surname" class="form-label">Surname</label>
+            <input
+              v-model="form.surname"
+              type="text"
+              class="form-control"
+              id="surname"
+              placeholder="Surname"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="message" class="form-label">Example textarea*</label>
+            <textarea
+              v-model="form.message"
+              class="form-control"
+              id="message"
+              rows="3"
+              placeholder="Enter text here"
+            ></textarea>
+          </div>
+
+          <div>
+            <button type="submit">Invia</button>
+          </div>
+        </form>
+      </div>
+    </section>
   </main>
 </template>
 
 <style lang="scss" scoped>
-main{
+main {
   padding-top: 6rem;
   padding-bottom: 4rem;
   background: #69788c;
@@ -132,7 +212,6 @@ main{
   padding: 2rem;
   background-color: white;
   color: #0c2230;
- 
 }
 
 .img_container {
@@ -147,53 +226,53 @@ main{
     width: 300px;
     height: 300px;
     border-radius: 50%;
-    border: 2px solid black ;
+    border: 2px solid black;
   }
 }
 .ms_btn {
- 
- display: inline-block;
- padding: 0.5rem 2rem;
- font-size: 16px;
- font-weight: 700;
- color:  #0c2230;
- border: 3px solid #0c2230;
- cursor: pointer;
- position: relative;
- background-color: transparent;
- text-decoration: none;
- overflow: hidden;
- z-index: 1;
- font-family: inherit;
+  display: inline-block;
+  padding: 0.5rem 2rem;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0c2230;
+  border: 3px solid #0c2230;
+  cursor: pointer;
+  position: relative;
+  background-color: transparent;
+  text-decoration: none;
+  overflow: hidden;
+  z-index: 1;
+  font-family: inherit;
 }
 
 .ms_btn::before {
- content: "";
- position: absolute;
- left: 0;
- top: 0;
- width: 100%;
- height: 100%;
- background-color: #F0F3F4;
- transform: translateX(-100%);
- transition: all .3s;
- z-index: -1;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f0f3f4;
+  transform: translateX(-100%);
+  transition: all 0.3s;
+  z-index: -1;
 }
 
 .ms_btn:hover::before {
- transform: translateX(0);
+  transform: translateX(0);
 }
 
 //Profile info
-h2{
+h2 {
   font-size: 4rem;
 }
-p{
-  
-}
 
-.profile_info{
+.profile_info {
   padding-top: 8rem;
   font-size: 2rem;
+}
+
+.form-container {
+  border: 1px solid black;
 }
 </style>
