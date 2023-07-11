@@ -138,8 +138,8 @@ export default {
         </div>
       </div>
 
-      <div class="form-container mt-3">
-        <form @submit.prevent="sendMessage">
+      <div class="form-container mt-4 p-3">
+        <form @submit.prevent="sendMessage" class="needs-validation" novalidate>
           <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label"
               >Email address*</label
@@ -150,8 +150,11 @@ export default {
               class="form-control"
               id="exampleFormControlInput1"
               placeholder="name@example.com"
+              required
             />
           </div>
+          <div class="invalid-feedback">Please choose a valid e-mail.</div>
+
           <div class="mb-3">
             <label for="name" class="form-label">Name*</label>
             <input
@@ -162,8 +165,9 @@ export default {
               placeholder="Name"
             />
           </div>
+
           <div class="mb-3">
-            <label for="surname" class="form-label">Surname</label>
+            <label for="surname" class="form-label">Surname*</label>
             <input
               v-model="form.surname"
               type="text"
@@ -185,7 +189,7 @@ export default {
           </div>
 
           <div>
-            <button type="submit">Invia</button>
+            <button type="submit" class="ms_btn">Invia</button>
           </div>
         </form>
       </div>
@@ -206,6 +210,7 @@ main {
 
 // BUTTON
 .ms_card {
+  border-radius: 10px;
   position: relative;
   width: 100%;
   margin: 0 auto;
@@ -230,6 +235,7 @@ main {
   }
 }
 .ms_btn {
+  border-radius: 10px;
   display: inline-block;
   padding: 0.5rem 2rem;
   font-size: 16px;
@@ -270,9 +276,5 @@ h2 {
 .profile_info {
   padding-top: 8rem;
   font-size: 2rem;
-}
-
-.form-container {
-  border: 1px solid black;
 }
 </style>

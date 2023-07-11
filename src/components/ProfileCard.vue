@@ -20,20 +20,19 @@ export default {
 </script>
 
 <template>
-
   <div class="ms_card mb-4">
     <div class="card-inner">
       <div class="card-front">
         <div v-if="profile.photo">
-          <img :src="imageUrl" alt=""  />
+          <img :src="imageUrl" alt="" />
         </div>
         <div v-else>
-          <img src="../assets/defaultimg/profilejpg.jpg" alt="" >
+          <img src="../assets/defaultimg/profilejpg.jpg" alt="" />
         </div>
       </div>
       <div class="card-back">
         <div class="ms_card-body mb-4">
-          <h2 class=" my-3"> {{ profile.surname }} {{ profile.name }}</h2>
+          <h2 class="my-3">{{ profile.surname }} {{ profile.name }}</h2>
           <h5 class="text-uppercase mb-3">Technologies:</h5>
           <div class="ms_technology_space">
             <ul class="list-unstyled flex-wrap">
@@ -42,10 +41,13 @@ export default {
               </li>
             </ul>
           </div>
-      </div>
-    <router-link :to="{ name: 'single-profile', params: { id: profile.id } }" class="ms_btn text-center align-self-center">
-      Details
-    </router-link>
+        </div>
+        <router-link
+          :to="{ name: 'single-profile', params: { id: profile.id } }"
+          class="ms_btn text-center align-self-center"
+        >
+          Details
+        </router-link>
       </div>
     </div>
   </div>
@@ -92,28 +94,26 @@ h2 {
 }
 
 .card-front {
-  background-color: #3E444C;
+  background-color: #3e444c;
   display: flex;
   align-items: center;
-  border: 3px solid #3E444C;
+  border: 3px solid #3e444c;
   border-radius: 10px;
   justify-content: center;
   transform: rotateY(0deg);
 }
 
 .card-back {
-  background-color: #D1D8E0;
+  background-color: #d1d8e0;
   color: #0c2230;
   display: flex;
   padding: 1rem;
   align-items: center;
-  border: 3px solid #3E444C;
+  border: 3px solid #3e444c;
   border-radius: 10px;
   justify-content: center;
   transform: rotateY(180deg);
 }
-
-
 
 // button style
 .ms_technology_space {
@@ -123,36 +123,37 @@ h2 {
 }
 
 .ms_btn {
- width: 50%;
- display: inline-block;
- padding: 0.5rem .5rem;
- font-size: 16px;
- font-weight: 700;
- color:  #0c2230;
- border: 3px solid #0c2230;
- cursor: pointer;
- position: relative;
- background-color: transparent;
- text-decoration: none;
- overflow: hidden;
- z-index: 1;
- font-family: inherit;
+  border-radius: 10px;
+  width: 50%;
+  display: inline-block;
+  padding: 0.5rem 0.5rem;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0c2230;
+  border: 3px solid #0c2230;
+  cursor: pointer;
+  position: relative;
+  background-color: transparent;
+  text-decoration: none;
+  overflow: hidden;
+  z-index: 1;
+  font-family: inherit;
 }
 
 .ms_btn::before {
- content: "";
- position: absolute;
- left: 0;
- top: 0;
- width: 100%;
- height: 100%;
- background-color: #F0F3F4;
- transform: translateX(-100%);
- transition: all .3s;
- z-index: -1;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f0f3f4;
+  transform: translateX(-100%);
+  transition: all 0.3s;
+  z-index: -1;
 }
 
 .ms_btn:hover::before {
- transform: translateX(0);
+  transform: translateX(0);
 }
 </style>
