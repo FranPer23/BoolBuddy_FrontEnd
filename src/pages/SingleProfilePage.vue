@@ -40,10 +40,28 @@ export default {
         }
       }
     );
+
+    const forms = document.querySelectorAll(".needs-validation");
+
+    Array.from(forms).forEach((form) => {
+      form.addEventListener(
+        "submit",
+        (event) => {
+          if (!form.reportValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          } else {
+            this.statusMessage = true;
+          }
+          form.classList.add("was-validated");
+        },
+        false,
+      );
+    });
   },
   methods: {
 
-    
+
     sendMessage() {
       const message = {
         name: this.form.name,
@@ -53,29 +71,10 @@ export default {
         specialist_id: this.$route.params.id,
       };
 
-      const forms = document.querySelectorAll(".needs-validation");
-
-      Array.from(forms).forEach((form) => {
-        form.addEventListener(
-          "submit",
-          (event) => {
-            if (!form.reportValidity()) {
-              event.preventDefault();
-              event.stopPropagation();
-            } else {
-              this.statusMessage = true;
-            }
-
-            form.classList.add("was-validated");
-          },
-        );
-      });
-
       //chiamata xios per gestione di invio messaggi
       axios
         .post(`${this.store.baseUrl}/api/messages`, message)
         .then(function (response) {
-
           // Gestisci la risposta del server in caso di successo
           console.log(response);
         })
@@ -83,11 +82,11 @@ export default {
           // Gestisci gli errori in caso di fallimento della richiesta
           console.error(error);
         }).finally(() => {
-          // this.form.name = "";
-          // this.form.surname = "";
-          // this.form.email = "";
-          // this.form.message = "";
-          // this.$route.params.id = "";
+          this.form.name = "";
+          this.form.surname = "";
+          this.form.email = "";
+          this.form.message = "";
+          this.$route.params.id = "";
         });
     },
   },
