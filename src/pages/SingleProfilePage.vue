@@ -18,6 +18,7 @@ export default {
         email: "",
         message: "",
       },
+      statusMessage: false,
     };
   },
   computed: {
@@ -81,6 +82,13 @@ export default {
         .catch(function (error) {
           // Gestisci gli errori in caso di fallimento della richiesta
           console.error(error);
+        }).finally(() => {
+          this.form.name = "";
+          this.form.surname = "";
+          this.form.email = "";
+          this.form.message = "";
+          this.$route.params.id = "";
+          statusMessage = true;
         });
     },
   },
@@ -117,10 +125,7 @@ export default {
             <div class="my-4">
               <div>
                 <i class="fa-solid fa-code"></i>
-                <ul
-                  class="list-unstyled"
-                  v-for="(technology, index) in profile.technology"
-                >
+                <ul class="list-unstyled" v-for="(technology, index) in profile.technology">
                   <li>
                     {{ technology.name }}
                   </li>
@@ -158,51 +163,26 @@ export default {
       <div class="form-container mt-4 p-3">
         <form @submit.prevent="sendMessage" class="needs-validation" novalidate>
           <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label"
-              >Email address*</label
-            >
-            <input
-              v-model="form.email"
-              type="email"
-              class="form-control"
-              id="exampleFormControlInput1"
-              placeholder="name@example.com"
-              required
-            />
+            <label for="exampleFormControlInput1" class="form-label">Email address*</label>
+            <input v-model="form.email" type="email" class="form-control" id="exampleFormControlInput1"
+              placeholder="name@example.com" required />
           </div>
           <div class="invalid-feedback">Please choose a valid e-mail.</div>
 
           <div class="mb-3">
             <label for="name" class="form-label">Name*</label>
-            <input
-              v-model="form.name"
-              type="text"
-              class="form-control"
-              id="name"
-              placeholder="Name"
-            />
+            <input v-model="form.name" type="text" class="form-control" id="name" placeholder="Name" />
           </div>
 
           <div class="mb-3">
             <label for="surname" class="form-label">Surname*</label>
-            <input
-              v-model="form.surname"
-              type="text"
-              class="form-control"
-              id="surname"
-              placeholder="Surname"
-            />
+            <input v-model="form.surname" type="text" class="form-control" id="surname" placeholder="Surname" />
           </div>
 
           <div class="mb-3">
             <label for="message" class="form-label">Example textarea*</label>
-            <textarea
-              v-model="form.message"
-              class="form-control"
-              id="message"
-              rows="3"
-              placeholder="Enter text here"
-            ></textarea>
+            <textarea v-model="form.message" class="form-control" id="message" rows="3"
+              placeholder="Enter text here"></textarea>
           </div>
 
           <div>
@@ -211,6 +191,9 @@ export default {
         </form>
       </div>
     </section>
+    <div v-if="statusMessage" class="container bg-success">
+      <p>Il messaggio è andato a buon fine</p>
+    </div>
   </main>
 </template>
 
@@ -244,6 +227,7 @@ main {
   top: -150px;
   right: 50%;
   transform: translate(50%, 0);
+
   img {
     width: 300px;
     height: 300px;
@@ -251,6 +235,7 @@ main {
     border: 2px solid black;
   }
 }
+
 .ms_btn {
   border-radius: 10px;
   display: inline-block;
