@@ -30,11 +30,6 @@ export default {
     const id = this.$route.params.id;
     axios.get(`${this.store.baseUrl}/api/profiles/${id}`).then(
       (resp) => {
-        // if (resp.data.success) {
-        //     this.profile = resp.data.results
-        // } else {
-        //     this.errorMessage = resp.data.error
-        // }
         this.profile = resp.data.results;
       },
       (error) => {
@@ -47,6 +42,8 @@ export default {
     );
   },
   methods: {
+
+    
     sendMessage() {
       const message = {
         name: this.form.name,
@@ -62,33 +59,35 @@ export default {
         form.addEventListener(
           "submit",
           (event) => {
-            if (!form.checkValidity()) {
+            if (!form.reportValidity()) {
               event.preventDefault();
               event.stopPropagation();
+            } else {
+              this.statusMessage = true;
             }
 
             form.classList.add("was-validated");
           },
-          false
         );
       });
 
+      //chiamata xios per gestione di invio messaggi
       axios
         .post(`${this.store.baseUrl}/api/messages`, message)
         .then(function (response) {
+
           // Gestisci la risposta del server in caso di successo
-          console.log(response.data);
+          console.log(response);
         })
         .catch(function (error) {
           // Gestisci gli errori in caso di fallimento della richiesta
           console.error(error);
         }).finally(() => {
-          this.form.name = "";
-          this.form.surname = "";
-          this.form.email = "";
-          this.form.message = "";
-          this.$route.params.id = "";
-          statusMessage = true;
+          // this.form.name = "";
+          // this.form.surname = "";
+          // this.form.email = "";
+          // this.form.message = "";
+          // this.$route.params.id = "";
         });
     },
   },
@@ -160,7 +159,7 @@ export default {
         </div>
       </div>
 
-      <div class="form-container mt-4 p-3">
+      <!-- <div class="form-container mt-4 p-3">
         <form @submit.prevent="sendMessage" class="needs-validation" novalidate>
           <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Email address*</label>
@@ -189,11 +188,59 @@ export default {
             <button type="submit" class="ms_btn">Invia</button>
           </div>
         </form>
+      </div> -->
+
+      <div class="form-container mt-4 p-3">
+        <form @submit.prevent="sendMessage" class="needs-validation" novalidate>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Email address*</label>
+            <input v-model="form.email" type="email" class="form-control was-validated" id="exampleFormControlInput1"
+              placeholder="name@example.com" required />
+            <div class="invalid-feedback">
+              <strong>Please choose a valid e-mail.</strong>
+            </div>
+            <div class="valid-feedback"><strong>Looks good!</strong></div>
+          </div>
+
+          <div class="mb-3">
+            <label for="name" class="form-label">Name*</label>
+            <input v-model="form.name" type="text" class="form-control was-validated" id="name" placeholder="Name"
+              required />
+            <div class="invalid-feedback">
+              <strong>Please choose a valid Name.</strong>
+            </div>
+            <div class="valid-feedback"><strong>Looks good!</strong></div>
+          </div>
+          <div class="mb-3">
+            <label for="surname" class="form-label">Surname*</label>
+            <input v-model="form.surname" type="text" class="form-control was-validated" id="surname"
+              placeholder="Surname" required />
+            <div class="invalid-feedback">
+              <strong>Please choose a valid Surname</strong>
+            </div>
+            <div class="valid-feedback"><strong>Looks good!</strong></div>
+          </div>
+
+          <div class="mb-3">
+            <label for="message" class="form-label">Example textarea*</label>
+            <textarea v-model="form.message" class="form-control was-validated" id="message" rows="3"
+              placeholder="Enter text here" required></textarea>
+            <div class="invalid-feedback">
+              <strong>Please enter your text before submitting.</strong>
+            </div>
+            <div class="valid-feedback"><strong>Looks good!</strong></div>
+          </div>
+
+          <div>
+            <button type="submit" class="ms_btn">Invia</button>
+          </div>
+        </form>
+      </div>
+
+      <div v-if="statusMessage" class="container bg-success">
+        <p>Il messaggio è andato a buon fine</p>
       </div>
     </section>
-    <div v-if="statusMessage" class="container bg-success">
-      <p>Il messaggio è andato a buon fine</p>
-    </div>
   </main>
 </template>
 
