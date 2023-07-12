@@ -54,7 +54,10 @@ export default {
   <main>
     <!-- Loading -->
     <div v-if="this.loading === true">
-      <h1 class="text-center">...LOADING...</h1>
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <h2>...LOADING...</h2>
     </div>
 
     <div v-else>

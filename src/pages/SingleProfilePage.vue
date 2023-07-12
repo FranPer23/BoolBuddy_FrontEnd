@@ -19,6 +19,8 @@ export default {
         message: "",
       },
       statusMessage: false,
+      vote: 0,
+      mouseOut: true,
     };
   },
   computed: {
@@ -41,23 +43,23 @@ export default {
       }
     );
 
-    const forms = document.querySelectorAll(".needs-validation");
+    // const forms = document.querySelectorAll(".needs-validation");
 
-    Array.from(forms).forEach((form) => {
-      form.addEventListener(
-        "submit",
-        (event) => {
-          if (!form.reportValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-          } else {
-            this.statusMessage = true;
-          }
-          form.classList.add("was-validated");
-        },
-        false,
-      );
-    });
+    // Array.from(forms).forEach((form) => {
+    //   form.addEventListener(
+    //     "submit",
+    //     (event) => {
+    //       if (!form.reportValidity()) {
+    //         event.preventDefault();
+    //         event.stopPropagation();
+    //       } else {
+    //         this.statusMessage = true;
+    //       }
+    //       form.classList.add("was-validated");
+    //     },
+    //     false,
+    //   );
+    // });
   },
   methods: {
 
@@ -87,6 +89,55 @@ export default {
           this.form.email = "";
           this.form.message = "";
           this.$route.params.id = "";
+        });
+    },
+
+
+    sendReview() {
+      const review = {
+        name: this.form.reviewName,
+        review: this.form.reviewMessage,
+        specialist_id: this.$route.params.id,
+      };
+      console.log(review);
+
+      // chiamata axios per gestione di invio delle recensioni
+      axios
+        .post(`${this.store.baseUrl}/api/reviews`, review)
+        .then(function (response) {
+          // Gestisci la risposta del server in caso di successo
+          console.log(response);
+        })
+        .catch(function (error) {
+          // Gestisci gli errori in caso di fallimento della richiesta
+          console.error(error);
+        }).finally(() => {
+          // this.form.reviewName = "";
+          // this.form.reviewMessage = "";
+          // this.$route.params.id = "";
+        });
+    },
+
+    sendVote() {
+      const vote = {
+        vote: this.form.reviewMessage,
+        specialist_id: this.$route.params.id,
+      };
+      console.log(this.vote);
+
+      // chiamata axios per gestione dei voti
+      axios
+        .post(`${this.store.baseUrl}/api/votes`, this.vote)
+        .then(function (response) {
+          // Gestisci la risposta del server in caso di successo
+          console.log(response);
+        })
+        .catch(function (error) {
+          // Gestisci gli errori in caso di fallimento della richiesta
+          console.error(error);
+        }).finally(() => {
+          this.mouseOut = true;
+          this.vote = 0;
         });
     },
   },
@@ -158,87 +209,159 @@ export default {
         </div>
       </div>
 
-      <!-- <div class="form-container mt-4 p-3">
-        <form @submit.prevent="sendMessage" class="needs-validation" novalidate>
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Email address*</label>
-            <input v-model="form.email" type="email" class="form-control" id="exampleFormControlInput1"
-              placeholder="name@example.com" required />
-          </div>
-          <div class="invalid-feedback">Please choose a valid e-mail.</div>
+      <p>
+        <button class="ms_btn my-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+          aria-expanded="false" aria-controls="collapseExample">
+          <span>Send message <i class="fa-solid fa-paper-plane"></i></span>
+        </button>
+      </p>
+      <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+          <!-- Message -->
+          <div class="form-container mt-4 p-3">
+            <form @submit.prevent="sendMessage" class="needs-validation" novalidate>
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Email address*</label>
+                <input v-model="form.email" type="email" class="form-control was-validated" id="exampleFormControlInput1"
+                  placeholder="name@example.com" required />
+                <div class="invalid-feedback">
+                  <strong>Please choose a valid e-mail.</strong>
+                </div>
+                <div class="valid-feedback"><strong>Looks good!</strong></div>
+              </div>
 
-          <div class="mb-3">
-            <label for="name" class="form-label">Name*</label>
-            <input v-model="form.name" type="text" class="form-control" id="name" placeholder="Name" />
-          </div>
+              <div class="mb-3">
+                <label for="name" class="form-label">Name*</label>
+                <input v-model="form.name" type="text" class="form-control was-validated" id="name" placeholder="Name"
+                  required />
+                <div class="invalid-feedback">
+                  <strong>Please choose a valid Name.</strong>
+                </div>
+                <div class="valid-feedback"><strong>Looks good!</strong></div>
+              </div>
+              <div class="mb-3">
+                <label for="surname" class="form-label">Surname*</label>
+                <input v-model="form.surname" type="text" class="form-control was-validated" id="surname"
+                  placeholder="Surname" required />
+                <div class="invalid-feedback">
+                  <strong>Please choose a valid Surname</strong>
+                </div>
+                <div class="valid-feedback"><strong>Looks good!</strong></div>
+              </div>
 
-          <div class="mb-3">
-            <label for="surname" class="form-label">Surname*</label>
-            <input v-model="form.surname" type="text" class="form-control" id="surname" placeholder="Surname" />
-          </div>
+              <div class="mb-3">
+                <label for="message" class="form-label">Example textarea*</label>
+                <textarea v-model="form.message" class="form-control was-validated" id="message" rows="3"
+                  placeholder="Enter text here" required></textarea>
+                <div class="invalid-feedback">
+                  <strong>Please enter your text before submitting.</strong>
+                </div>
+                <div class="valid-feedback"><strong>Looks good!</strong></div>
+              </div>
 
-          <div class="mb-3">
-            <label for="message" class="form-label">Example textarea*</label>
-            <textarea v-model="form.message" class="form-control" id="message" rows="3"
-              placeholder="Enter text here"></textarea>
+              <div>
+                <button type="submit" class="ms_btn">Invia</button>
+              </div>
+            </form>
           </div>
-
-          <div>
-            <button type="submit" class="ms_btn">Invia</button>
-          </div>
-        </form>
-      </div> -->
-
-      <div class="form-container mt-4 p-3">
-        <form @submit.prevent="sendMessage" class="needs-validation" novalidate>
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Email address*</label>
-            <input v-model="form.email" type="email" class="form-control was-validated" id="exampleFormControlInput1"
-              placeholder="name@example.com" required />
-            <div class="invalid-feedback">
-              <strong>Please choose a valid e-mail.</strong>
-            </div>
-            <div class="valid-feedback"><strong>Looks good!</strong></div>
-          </div>
-
-          <div class="mb-3">
-            <label for="name" class="form-label">Name*</label>
-            <input v-model="form.name" type="text" class="form-control was-validated" id="name" placeholder="Name"
-              required />
-            <div class="invalid-feedback">
-              <strong>Please choose a valid Name.</strong>
-            </div>
-            <div class="valid-feedback"><strong>Looks good!</strong></div>
-          </div>
-          <div class="mb-3">
-            <label for="surname" class="form-label">Surname*</label>
-            <input v-model="form.surname" type="text" class="form-control was-validated" id="surname"
-              placeholder="Surname" required />
-            <div class="invalid-feedback">
-              <strong>Please choose a valid Surname</strong>
-            </div>
-            <div class="valid-feedback"><strong>Looks good!</strong></div>
-          </div>
-
-          <div class="mb-3">
-            <label for="message" class="form-label">Example textarea*</label>
-            <textarea v-model="form.message" class="form-control was-validated" id="message" rows="3"
-              placeholder="Enter text here" required></textarea>
-            <div class="invalid-feedback">
-              <strong>Please enter your text before submitting.</strong>
-            </div>
-            <div class="valid-feedback"><strong>Looks good!</strong></div>
-          </div>
-
-          <div>
-            <button type="submit" class="ms_btn">Invia</button>
-          </div>
-        </form>
+        </div>
       </div>
 
-      <div v-if="statusMessage" class="container bg-success">
+
+      <!-- <div v-if="statusMessage" class="container bg-success">
         <p>Il messaggio è andato a buon fine</p>
+      </div> -->
+      <!-- End Message -->
+
+
+      <!-- Reviews -->
+      <p>
+        <button class="ms_btn my-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1"
+          aria-expanded="false" aria-controls="collapseExample1">
+          <i class="fa-solid fa-pen-nib"></i>
+        </button>
+      </p>
+      <div class="collapse" id="collapseExample1">
+        <div class="card card-body">
+          <div class="form-container mt-4 p-3">
+            <form @submit.prevent="sendReview">
+
+              <div class="mb-3">
+                <label for="reviewName" class="form-label">Name*</label>
+                <input v-model="form.reviewName" type="text" class="form-control" id="reviewName" placeholder="name" />
+              </div>
+
+              <div class="mb-3">
+                <label for="reviewMessage" class="form-label">Example textarea*</label>
+                <textarea v-model="form.reviewMessage" class="form-control" id="reviewMessage" rows="3"
+                  placeholder="Enter text here"></textarea>
+              </div>
+
+              <div>
+                <button type="submit" class="ms_btn">Invia</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
+      <!-- Fine Reviews -->
+
+      <!-- Votes -->
+      <p>
+        <button class="ms_btn my-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2"
+          aria-expanded="false" aria-controls="collapseExample2">
+          RATE ME
+        </button>
+      </p>
+      <div class="collapse" id="collapseExample2">
+        <div class="form-container mt-4 p-3">
+          <form @submit.prevent="sendVote">
+
+            <div class="card card-body">
+              <div class="form-container mt-4 p-3 d-flex justify-content-start">
+                <span class="mx-3">VOTO:</span>
+                <div v-for="n in 5">
+                  <i v-if="n > this.vote" class="fa-regular fa-star me-3 ms_vote" id="n"
+                    @mouseover.prevent="this.mouseOut ? this.vote = n : null"></i>
+                  <i v-else class="fa-solid fa-star me-3 ms_vote" id="n"
+                    @click="this.vote = n; this.mouseOut = !this.mouseOut"
+                    @mouseout.prevent="this.mouseOut ? this.vote = 0 : null"></i>
+                </div>
+                <!-- <div class="form-check form-check-inline">
+                  <input v-model="form.vote" class="form-check-input" type="radio" name="vote" id="inlineRadio1"
+                    value="1">
+                  <label class="form-check-label" for="inlineRadio1">1</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input v-model="form.vote" class="form-check-input" type="radio" name="vote" id="inlineRadio2"
+                    value="2">
+                  <label class="form-check-label" for="inlineRadio2">2</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input v-model="form.vote" class="form-check-input" type="radio" name="vote" id="inlineRadio3"
+                    value="3">
+                  <label class="form-check-label" for="inlineRadio3">3</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input v-model="form.vote" class="form-check-input" type="radio" name="vote" id="inlineRadio4"
+                    value="4">
+                  <label class="form-check-label" for="inlineRadio4">4</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input v-model="form.vote" class="form-check-input" type="radio" name="vote" id="inlineRadio5"
+                    value="5">
+                  <label class="form-check-label" for="inlineRadio5">5</label>
+                </div> -->
+                <div>
+                  <button type="submit" class="ms_btn mx-3">Invia</button>
+                </div>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+      <!-- End Votes -->
     </section>
   </main>
 </template>
@@ -324,5 +447,10 @@ h2 {
 .profile_info {
   padding-top: 8rem;
   font-size: 2rem;
+}
+
+//Vote
+.ms_vote {
+  cursor: pointer;
 }
 </style>
