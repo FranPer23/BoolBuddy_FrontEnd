@@ -43,27 +43,24 @@ export default {
       }
     );
 
-    // const forms = document.querySelectorAll(".needs-validation");
-
-    // Array.from(forms).forEach((form) => {
-    //   form.addEventListener(
-    //     "submit",
-    //     (event) => {
-    //       if (!form.reportValidity()) {
-    //         event.preventDefault();
-    //         event.stopPropagation();
-    //       } else {
-    //         this.statusMessage = true;
-    //       }
-    //       form.classList.add("was-validated");
-    //     },
-    //     false,
-    //   );
-    // });
+    //  const forms = document.querySelectorAll(".needs-validation")
+    //  Array.from(forms).forEach((form) => {
+    //    form.addEventListener(
+    //      "submit",
+    //      (event) => {
+    //        if (!form.reportValidity()) {
+    //          event.preventDefault();
+    //          event.stopPropagation();
+    //        } else {
+    //          this.statusMessage = true;
+    //        }
+    //        form.classList.add("was-validated");
+    //      },
+    //      false,
+    //    );
+    //  });
   },
   methods: {
-
-
     sendMessage() {
       const message = {
         name: this.form.name,
@@ -79,6 +76,7 @@ export default {
         .then(function (response) {
           // Gestisci la risposta del server in caso di successo
           console.log(response);
+          
         })
         .catch(function (error) {
           // Gestisci gli errori in caso di fallimento della richiesta
@@ -88,7 +86,7 @@ export default {
           this.form.surname = "";
           this.form.email = "";
           this.form.message = "";
-          this.$route.params.id = "";
+          // this.$route.push('/search');
         });
     },
 
@@ -112,9 +110,8 @@ export default {
           // Gestisci gli errori in caso di fallimento della richiesta
           console.error(error);
         }).finally(() => {
-          // this.form.reviewName = "";
-          // this.form.reviewMessage = "";
-          // this.$route.params.id = "";
+          this.form.reviewName = "";
+          this.form.reviewMessage = "";
         });
     },
 
@@ -217,6 +214,8 @@ export default {
       </p>
       <div class="collapse" id="collapseExample">
         <div class="card card-body">
+
+
           <!-- Message -->
           <div class="form-container mt-4 p-3">
             <form @submit.prevent="sendMessage" class="needs-validation" novalidate>
@@ -268,9 +267,9 @@ export default {
       </div>
 
 
-      <!-- <div v-if="statusMessage" class="container bg-success">
+      <div v-if="statusMessage" class="container bg-success">
         <p>Il messaggio è andato a buon fine</p>
-      </div> -->
+      </div>
       <!-- End Message -->
 
 
