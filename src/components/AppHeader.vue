@@ -12,10 +12,10 @@ export default {
           label: "Home",
           routeName: "home",
         },
-        {
-          label: "Profiles",
-          routeName: "profiles",
-        },
+        // {
+        //   label: "Profiles",
+        //   routeName: "profiles",
+        // },
         {
           label: "Search",
           routeName: "search",
