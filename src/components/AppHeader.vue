@@ -1,9 +1,12 @@
 <script>
+import { store } from "../store";
+
 export default {
   name: "AppHeader",
 
   data() {
     return {
+      store,
       menuItems: [
         {
           label: "Home",
@@ -52,10 +55,10 @@ export default {
           </ul>
           <ul class="navbar-nav d-flex justify-content-end w-50">
             <li class="me-3">
-              <a href="http://localhost:3306/login">Login</a>
+              <a :href="`${this.store.baseUrl}/login`">Login</a>
             </li>
             <li>
-              <a href="http://localhost:3306/register">Register</a>
+              <a :href="`${this.store.baseUrl}/register`">Register</a>
             </li>
           </ul>
         </div>
@@ -64,8 +67,7 @@ export default {
   </header>
 </template>
 <style lang="scss" scoped>
-
-a{
+a {
   text-decoration: none;
   color: inherit;
 }
