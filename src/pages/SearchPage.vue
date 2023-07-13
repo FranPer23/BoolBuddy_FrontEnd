@@ -26,17 +26,19 @@ export default {
 
       const params = {
         page: page,
-      }
+      };
 
       if (this.store.selectedTechnology !== "") {
         if (this.store.selectedTechnology !== "all") {
           params.technology_id = this.store.selectedTechnology;
         }
       }
-      axios.get(`${this.store.baseUrl}/api/profiles`, { params })
+      axios
+        .get(`${this.store.baseUrl}/api/profiles`, { params })
         .then((resp) => {
           this.profiles = resp.data.results.data;
-        }).finally(() => {
+        })
+        .finally(() => {
           this.loading = false;
         });
     },
@@ -44,7 +46,7 @@ export default {
       axios.get(`${this.store.baseUrl}/api/technologies`).then((resp) => {
         this.technologies = resp.data.results;
         console.log(resp.data.results);
-      })
+      });
     },
   },
 };
@@ -53,23 +55,36 @@ export default {
 <template>
   <main>
     <!-- Loading -->
-    <div v-if="this.loading === true">
-      <div class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
+    <div v-if="this.loading === true" class="load_container">
+      <div class="ms_loader">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
       </div>
-      <h2>...LOADING...</h2>
+      <div class="loading_text">
+        <h2>...LOADING...</h2>
+      </div>
     </div>
 
     <div v-else>
       <div class="container">
         <div class="col">
           <label class="form-label" for="technology">Technologies</label>
-          <select v-model="this.store.selectedTechnology" id="technology" class="form-select w-100"
-            @change="getProfiles()">
+          <select
+            v-model="this.store.selectedTechnology"
+            id="technology"
+            class="form-select w-100"
+            @change="getProfiles()"
+          >
             <option selected value=""></option>
             <option value="all">ALL</option>
-            <option v-for="technology_item in technologies" :key="technology_item.id" :value="technology_item.id">{{
-              technology_item.name }}</option>
+            <option
+              v-for="technology_item in technologies"
+              :key="technology_item.id"
+              :value="technology_item.id"
+            >
+              {{ technology_item.name }}
+            </option>
           </select>
         </div>
 
@@ -100,5 +115,23 @@ main {
   background: #69788c;
   background: -webkit-linear-gradient(58deg, #69788c 0%, #f0f3f4 100%);
   background: linear-gradient(58deg, #69788c 0%, #f0f3f4 100%);
+}
+
+.load_container {
+  position: relative;
+}
+.ms_loader {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  z-index: 1000;
+  height: 31px;
+  width: 31px;
+}
+
+.loading_text {
+  padding-top: 5rem;
+  display: flex;
+  justify-content: center;
 }
 </style>
