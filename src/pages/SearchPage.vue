@@ -83,7 +83,7 @@ export default {
 
         <template v-else>
           <p class="text-center text-uppercase py-3">
-            Technologies not found
+            No match for your search
           </p>
         </template>
       </div>

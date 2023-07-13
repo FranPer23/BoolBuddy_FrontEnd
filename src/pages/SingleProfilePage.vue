@@ -27,6 +27,9 @@ export default {
     imageUrl() {
       return `${this.store.baseUrl}/storage${this.profile.photo}`;
     },
+    cvUrl() {
+      return`${this.store.baseUrl}/storage${this.profile.cv}`;
+    }
   },
   mounted() {
     const id = this.$route.params.id;
@@ -117,7 +120,7 @@ export default {
 
     sendVote() {
       const vote = {
-        vote: this.form.reviewMessage,
+        vote: this.form.vote,
         specialist_id: this.$route.params.id,
       };
       console.log(this.vote);
@@ -134,7 +137,7 @@ export default {
           console.error(error);
         }).finally(() => {
           this.mouseOut = true;
-          this.vote = 0;
+          // this.vote = 0;
         });
     },
   },
@@ -197,6 +200,11 @@ export default {
               <p>
                 {{ profile.service }}
               </p>
+            </div>
+            <span v-else></span>
+            <i class="fa-solid fa-file mb-4"> CV</i>
+            <div v-if="profile.cv"> 
+              <img :src="cvUrl" alt="" />
             </div>
             <span v-else></span>
           </div>
