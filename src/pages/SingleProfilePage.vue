@@ -28,7 +28,7 @@ export default {
       return `${this.store.baseUrl}/storage${this.profile.photo}`;
     },
     cvUrl() {
-      return`${this.store.baseUrl}/storage${this.profile.cv}`;
+      return `${this.store.baseUrl}/storage${this.profile.cv}`;
     }
   },
   mounted() {
@@ -79,7 +79,7 @@ export default {
         .then(function (response) {
           // Gestisci la risposta del server in caso di successo
           console.log(response);
-          
+
         })
         .catch(function (error) {
           // Gestisci gli errori in caso di fallimento della richiesta
@@ -120,14 +120,16 @@ export default {
 
     sendVote() {
       const vote = {
-        vote: this.form.vote,
+        vote: this.vote,
+        username: 'pippo',
         specialist_id: this.$route.params.id,
+        user_id: 1,
       };
       console.log(this.vote);
 
       // chiamata axios per gestione dei voti
       axios
-        .post(`${this.store.baseUrl}/api/votes`, this.vote)
+        .post(`${this.store.baseUrl}/api/votes`, vote)
         .then(function (response) {
           // Gestisci la risposta del server in caso di successo
           console.log(response);
@@ -136,7 +138,7 @@ export default {
           // Gestisci gli errori in caso di fallimento della richiesta
           console.error(error);
         }).finally(() => {
-          this.mouseOut = true;
+          // this.mouseOut = true;
           // this.vote = 0;
         });
     },
@@ -203,7 +205,7 @@ export default {
             </div>
             <span v-else></span>
             <i class="fa-solid fa-file mb-4"> CV</i>
-            <div v-if="profile.cv"> 
+            <div v-if="profile.cv">
               <img :src="cvUrl" alt="" />
             </div>
             <span v-else></span>
