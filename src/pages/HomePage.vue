@@ -32,7 +32,7 @@ export default {
 
   computed: {
     imageUrl() {
-      return `${this.store.baseUrl}/storage${this.profile.photo}`;
+      return `${this.store.baseUrl}/storage${profile.photo}`;
     },
   },
 
@@ -93,14 +93,47 @@ export default {
 
   <!-- carousel made with vueperslides -->
   <h3 class="pt-5 text-center">Meet the newcomers!</h3>
-  <vueper-slides class="no-shadow" :visibleSlides="3" slide-multiple :slidePerView="1" :gap="5" :bullets="false"
+  <!-- <vueper-slides class="no-shadow" :visibleSlides="3" slide-multiple :slidePerView="1" :gap="5" :bullets="false"
     :arrows="true" :breakpoints="{ 800: { visibleSlides: 1, slideMultiple: 1 } }" :touchable="false">
     <vueper-slide class="slide" v-for="profile in profiles" :key="user_id" :title="profile.name"
       :content="profile.surname">
+    </vueper-slide>
+  </vueper-slides> -->
+
+  <vueper-slides class="no-shadow" :visibleSlides="3" slide-multiple :slidePerView="1" :gap="5" :bullets="false"
+    :arrows="true" :breakpoints="{ 800: { visibleSlides: 1, slideMultiple: 1 } }" :touchable="false">
+    <vueper-slide class="slide" v-for="profile in profiles" :key="user_id" :title="profile.name"
+      :content="profile.surname"
+      :image="profile.photo ? `${this.store.baseUrl}/storage${profile.photo}` : 'src/assets/defaultimg/profilejpg.jpg'">
     </vueper-slide>
   </vueper-slides>
 </template>
 
 <style lang="scss">
 @use '../assets/Style/AppHomePage.scss';
+
+.no-shadow {
+  .slide {
+    opacity: 0.9;
+  }
+
+  .vueperslide {
+
+    &__title {
+      color: black;
+      font-size: 2rem;
+      text-transform: uppercase;
+    }
+
+    &__content {
+      color: black;
+      font-size: 2rem;
+      text-transform: uppercase;
+    }
+
+    &__content-wrapper {
+      background-color: transparent;
+    }
+  }
+}
 </style>
