@@ -82,7 +82,7 @@ export default {
         <label class="form-label" for="technology">Technologies</label>
         <select v-model="selectedTechnology" id="technology" class="form-select w-50 m-auto" @change="getProfiles()">
           <option selected value=""></option>
-          <option value="all">ALL</option>
+          <option value="all">All</option>
           <option v-for="technology_item in technologies" :key="technology_item.id" :value="technology_item.id">{{
             technology_item.name }}</option>
         </select>
@@ -90,9 +90,11 @@ export default {
 
     </div>
   </div>
+
   <!-- carousel made with vueperslides -->
-  <vueper-slides class="no-shadow" :visibleSlides="3" :slidePerView="1" :draggingDistance="70" :gap="5" :bullets="true"
-    :arrows="false" :slideImageInside="true">
+  <h3 class="pt-5 text-center">Meet the newcomers!</h3>
+  <vueper-slides class="no-shadow" :visibleSlides="3" slide-multiple :slidePerView="1" :gap="5" :bullets="false"
+    :arrows="true" :breakpoints="{ 800: { visibleSlides: 1, slideMultiple: 1 } }" :touchable="false">
     <vueper-slide class="slide" v-for="profile in profiles" :key="user_id" :title="profile.name"
       :content="profile.surname">
     </vueper-slide>

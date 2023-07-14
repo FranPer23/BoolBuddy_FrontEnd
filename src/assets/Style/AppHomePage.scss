@@ -14,19 +14,23 @@
 }
 
 .no-shadow {
-    width: 90%;
+    width: 80%;
     height: 300px;
     margin: 0 auto;
-    padding: 0;
-
+    padding-top: 2rem;
+    
     .slide {
+        // border: 1px solid red;
         height: 300px;
         opacity: 0.5;
+        transition: opacity .3s ease;
     }
 
     .vueperslide__content-wrapper {
 
         text-align: left !important;
+        background-color: #f0f3f4;
+        border-radius: 25px;
 
         .vueperslide__title {
             // color: c.$powder-color;
@@ -41,8 +45,7 @@
     }
 
     .vueperslides__arrow {
-        top: 40% !important;
-        transform: translateY(-50%) !important;
+        transform: translateY(-50%) !important; 
     }
 
     .vueperslides__parallax-wrapper {
@@ -69,5 +72,7 @@
 
     .vueperslide--active {
         opacity: 1;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        border-radius: 25px;
     }
 }
