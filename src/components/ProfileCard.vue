@@ -20,7 +20,7 @@ export default {
 </script>
 
 <template>
-  <div class="ms_card mb-4">
+  <!-- <div class="ms_card mb-4">
     <div class="card-inner">
       <div class="card-front">
         <div v-if="profile.photo">
@@ -42,13 +42,40 @@ export default {
             </ul>
           </div>
         </div>
-        <router-link
-          :to="{ name: 'single-profile', params: { id: profile.id } }"
-          class="ms_btn text-center align-self-center"
-        >
+        <router-link :to="{ name: 'single-profile', params: { id: profile.id } }"
+          class="ms_btn text-center align-self-center">
           Details
         </router-link>
       </div>
+    </div>
+  </div> -->
+  
+  <!-- prova -->
+  <div class="card-client">
+    <div class="user-picture">
+      <div v-if="profile.photo">
+        <img :src="imageUrl" alt="" />
+      </div>
+      <div v-else>
+        <img src="../assets/defaultimg/profilejpg.jpg" alt="" />
+      </div>
+    </div>
+    <p class="name-client text-center"> {{ profile.surname }} {{ profile.name }}
+    </p>
+    <hr>
+    <div class="ms_technology_space">
+      <ul class="list-unstyled flex-wrap d-flex justify-content-between">
+        <li v-for="technology in profile.technology" class="col-6">
+          {{ technology.name }}
+        </li>
+      </ul>
+    </div>
+    <div class="d-flex justify-content-center">
+      <router-link :to="{ name: 'single-profile', params: { id: profile.id } }"
+        class="ms_btn text-center align-self-center">
+        Details
+      </router-link>
+
     </div>
   </div>
 </template>
@@ -56,71 +83,59 @@ export default {
 <style lang="scss" scoped>
 // STYLE
 img {
-  width: 400px;
-  height: 400px;
-  border-radius: 10px;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
 }
 
 h2 {
   font-size: 2.5rem;
 }
+
 // CARD
-.ms_card {
-  height: 400px;
-  width: 400px;
-  perspective: 2500px;
-  cursor: pointer;
+.ms_technology_space {
+  font-size: 1rem;
+  height: 100px;
 }
-
-.card-inner {
-  width: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.999s;
-}
-
-.ms_card:hover .card-inner {
-  transform: rotateY(180deg);
-  font-weight: 700 !important;
-  background: none;
-  transition: all 0.3s ease 0s;
-}
-
-.card-front,
-.card-back {
-  position: absolute;
-  width: 100%;
-  backface-visibility: hidden;
-}
-
-.card-front {
-  background-color: #3e444c;
-  display: flex;
-  align-items: center;
-  border: 3px solid #3e444c;
+.card-client {
+  background-color: rgba(255, 255, 255, 0.692);
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border: 4px solid rgb(190, 187, 187);
+  box-shadow: 0 6px 10px rgb(18, 18, 19);
   border-radius: 10px;
-  justify-content: center;
-  transform: rotateY(0deg);
-}
 
-.card-back {
-  background-color: #d1d8e0;
   color: #0c2230;
+  font-family: "Poppins", sans-serif;
+  transition: all 0.3s ease;
+}
+
+.card-client:hover {
+  transform: translateY(-10px);
+}
+
+.user-picture {
+  overflow: hidden;
+  object-fit: cover;
+  width: 10rem;
+  height: 10rem;
   display: flex;
-  padding: 1rem;
-  align-items: center;
-  border: 3px solid #3e444c;
-  border-radius: 10px;
   justify-content: center;
-  transform: rotateY(180deg);
+  align-items: center;
+  margin: auto;
+}
+
+
+.name-client {
+  margin: 0;
+  margin-top: 20px;
+  font-weight: 600;
+  font-size: 18px;
 }
 
 // button style
-.ms_technology_space {
-  font-size: 1rem;
-  height: 200px;
-  align-items: center;
-}
 
 .ms_btn {
   border-radius: 10px;
@@ -157,3 +172,4 @@ h2 {
   transform: translateX(0);
 }
 </style>
+
