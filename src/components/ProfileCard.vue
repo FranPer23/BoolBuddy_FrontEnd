@@ -16,6 +16,17 @@ export default {
       return `${this.store.baseUrl}/storage${this.profile.photo}`;
     },
   },
+  methods: {
+    avg(voti) {
+      console.log(voti);
+      let sum = 0;
+      voti.forEach(voto => {
+        sum = parseInt(voto.vote) + sum;
+      });
+      // console.log(sum / voti.length);
+      return (sum / voti.length);
+    }
+  }
 };
 </script>
 
@@ -49,7 +60,7 @@ export default {
       </div>
     </div>
   </div> -->
-  
+
   <!-- prova -->
   <div class="card-client">
     <div class="user-picture">
@@ -70,6 +81,14 @@ export default {
         </li>
       </ul>
     </div>
+
+    <div class="d-flex justify-content-center mb-3">
+      <div v-for="n in 5">
+        <i v-if="avg(profile.votes) >= n" class="fa-solid fa-star me-3 ms_vote"></i>
+        <i v-else class="fa-regular fa-star me-3 ms_vote"></i>
+      </div>
+    </div>
+
     <div class="d-flex justify-content-center">
       <router-link :to="{ name: 'single-profile', params: { id: profile.id } }"
         class="ms_btn text-center align-self-center">
@@ -97,6 +116,7 @@ h2 {
   font-size: 1rem;
   height: 100px;
 }
+
 .card-client {
   background-color: rgba(255, 255, 255, 0.692);
   padding-top: 25px;

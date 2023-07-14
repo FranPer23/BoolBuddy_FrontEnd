@@ -94,11 +94,11 @@ export default {
           <select v-model="this.averageVote" id="averageVote" class="form-select ms-3 w-75 my-3" @change="getProfiles()">
             <option selected value=""></option>
             <option value="all">ALL</option>
-            <option value="1">>1</option>
-            <option value="2">>2</option>
-            <option value="3">>3</option>
-            <option value="4">>4</option>
-            <option value="5">>5</option>
+            <option value="1">>= 1</option>
+            <option value="2">>= 2</option>
+            <option value="3">>= 3</option>
+            <option value="4">>= 4</option>
+            <option value="5">>= 5</option>
           </select>
         </div>
 
