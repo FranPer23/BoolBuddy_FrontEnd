@@ -30,7 +30,12 @@ export default {
   <header class="text-center p-2">
     <nav class="navbar navbar-expand-lg">
       <div class="container">
-        <a class="navbar-brand" href="#">BoolBuddy</a>
+        <!-- <a class="navbar-brand" href="#">BoolBuddy</a> -->
+        <img
+          class="top-left-img"
+          src="../assets/defaultimg/boolbuddy-text.png"
+          alt=""
+        />
         <button
           class="navbar-toggler"
           type="button"
@@ -53,6 +58,11 @@ export default {
               >
             </li>
           </ul>
+          <ul>
+            <li style="width: 20rem">
+              <img class="logo-img" src="../assets/img/5.png" alt="" />
+            </li>
+          </ul>
           <ul class="navbar-nav d-flex justify-content-end w-50">
             <li class="me-3">
               <a :href="`${this.store.baseUrl}/login`">Login</a>
@@ -67,8 +77,26 @@ export default {
   </header>
 </template>
 <style lang="scss" scoped>
+// IMAGES
+.top-left-img {
+  width: 10%;
+}
+.logo-img {
+  float: none;
+  width: 7%;
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+}
+
 a {
   text-decoration: none;
   color: inherit;
 }
+ul {
+  list-style-type: none;
+}
+
+//
 </style>
