@@ -336,11 +336,15 @@ export default {
         </div>
         <!-- END MESSAGE FORM -->
 
-        <!-- START REVIEWS FRM -->
+        <!-- START REVIEWS FORM -->
         <div class="collapse mt-4 p-3" id="collapseExample1">
           <div class="card card-body">
             <div class="form-container mt-2 p-3">
-              <form @submit.prevent="sendReview">
+              <form
+                @submit.prevent="sendReview"
+                class="needs-validation"
+                novalidate
+              >
                 <div class="mb-3">
                   <label for="reviewName" class="form-label">Name*</label>
                   <input
@@ -349,6 +353,7 @@ export default {
                     class="form-control"
                     id="reviewName"
                     placeholder="name"
+                    required
                   />
                 </div>
 
@@ -362,6 +367,7 @@ export default {
                     id="reviewMessage"
                     rows="3"
                     placeholder="Enter your message here"
+                    required
                   ></textarea>
                 </div>
 
