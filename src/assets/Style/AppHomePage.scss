@@ -18,6 +18,7 @@
     height: 300px;
     margin: 0 auto;
     padding-top: 2rem;
+    margin-bottom: 5rem;
     
     .slide {
         // border: 1px solid red;
@@ -30,7 +31,8 @@
 
         text-align: left !important;
         background-color: #f0f3f4;
-        border-radius: 25px;
+        // border-radius: 25px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 
         .vueperslide__title {
             // color: c.$powder-color;
@@ -71,8 +73,8 @@
     }
 
     .vueperslide--active {
-        opacity: 1;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        border-radius: 25px;
+        // opacity: 1;
+        
+        // border-radius: 25px;
     }
 }

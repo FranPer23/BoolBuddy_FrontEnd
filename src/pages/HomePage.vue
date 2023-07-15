@@ -100,7 +100,7 @@ export default {
     </vueper-slide>
   </vueper-slides> -->
 
-  <vueper-slides class="no-shadow" :visibleSlides="3" slide-multiple :slidePerView="1" :gap="5" :bullets="false"
+  <vueper-slides class="no-shadow" :visibleSlides="3" slide-multiple :slidePerView="3" :gap="5" :bullets="false"
     :arrows="true" :breakpoints="{ 800: { visibleSlides: 1, slideMultiple: 1 } }" :touchable="false">
     <vueper-slide class="slide" v-for="profile in profiles" :key="user_id" :title="profile.name"
       :content="profile.surname"
