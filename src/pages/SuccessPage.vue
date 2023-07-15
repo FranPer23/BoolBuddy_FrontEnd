@@ -19,9 +19,11 @@
               <div
                 class="success-button-container d-flex justify-content-center"
               >
-                <router-link :to="{ name: 'home' }" class="ms_btn mb-4">
-                  Home
-                </router-link>
+                <button class="ms_btn" onclick="history.back()" type="button">
+                  <span>
+                    Go back<i class="fa-solid fa-paper-arrow-left fa-flip"></i>
+                  </span>
+                </button>
               </div>
             </div>
           </div>
