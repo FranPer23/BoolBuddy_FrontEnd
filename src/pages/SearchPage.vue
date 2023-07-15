@@ -106,8 +106,8 @@
 
                 <div>
                     <div v-if="this.profiles.length > 0">
-                        <div class="row row-cols-3 ms-1">
-                            <div class="col g-4" v-for="profile in profiles">
+                        <div class="row ms-1">
+                            <div class="col-lg-4 col-md-6 col-sm-12 g-4" v-for="profile in profiles">
                                 <ProfileCard :profile="profile" />
                             </div>
                         </div>
