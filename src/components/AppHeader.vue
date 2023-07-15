@@ -27,15 +27,15 @@ export default {
 </script>
 
 <template>
-  <header class="text-center p-2">
+  <header class="text-center p-3">
     <nav class="navbar navbar-expand-lg">
       <div class="container">
-        <!-- <a class="navbar-brand" href="#">BoolBuddy</a> -->
-        <img
+        <a class="navbar-brand" href="#">BoolBuddy</a>
+        <!-- <img
           class="top-left-img"
           src="../assets/defaultimg/boolbuddy-text.png"
           alt=""
-        />
+        /> -->
         <button
           class="navbar-toggler"
           type="button"
@@ -77,16 +77,20 @@ export default {
   </header>
 </template>
 <style lang="scss" scoped>
+//HEADER
+header {
+  background-color: #c9c9c9;
+}
 // IMAGES
 .top-left-img {
-  width: 10%;
+  width: 12%;
 }
 .logo-img {
   float: none;
   width: 7%;
   position: absolute;
-  top: 50%;
-  left: 55%;
+  top: 65%;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 
