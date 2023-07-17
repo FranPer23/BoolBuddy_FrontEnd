@@ -10,6 +10,7 @@
                 store,
                 loading: false,
                 averageVote: "all",
+                minReviews: "all",
             };
         },
 
@@ -23,7 +24,7 @@
         },
         methods: {
             getProfiles(page = 1) {
-                console.log(this.averageVote);
+                console.log(this.averageVote, this.minReviews);
                 this.loading = true;
 
                 const params = {
@@ -39,6 +40,11 @@
                 if (this.averageVote !== "") {
                     if (this.averageVote !== "all") {
                         params.averageVote = this.averageVote;
+                    }
+                }
+                if (this.minReviews !== "") {
+                    if (this.minReviews !== "all") {
+                        params.minReviews = this.minReviews;
                     }
                 }
 
@@ -75,9 +81,11 @@
                     <h2>...LOADING...</h2>
                 </div>
             </div>
+            <!-- End Loading -->
 
             <div v-else class="container">
-
+            
+                <!-- Technologies Filter -->
                 <div class="col-11 d-flex justify-content-center">
                     <label class="form-label ms-5" for="technology">Technologies</label>
                     <select v-model="this.store.selectedTechnology" id="technology" class="form-select ms-3"
@@ -89,7 +97,9 @@
                             technology_item.name }}</option>
                     </select>
                 </div>
+                <!-- End Technologies Filter -->
 
+                <!-- Votes Filter -->
                 <div class="col-11 d-flex justify-content-center">
                     <label class="form-label ms-5 my-3" for="averageVote">Average Vote</label>
                     <select v-model="this.averageVote" id="averageVote" class="form-select ms-3 w-75 my-3"
@@ -103,6 +113,24 @@
                         <option value="5">>= 5</option>
                     </select>
                 </div>
+                <!-- End Votes Filter -->
+
+            <!-- Reviews Filter -->
+                <div class="col-11 d-flex justify-content-center">
+                    <label class="form-label ms-5 my-3" for="minReviews">Min number of reviews</label>
+                    <select v-model="this.minReviews" id="minReviews" class="form-select ms-3 w-75 my-3"
+                        @change="getProfiles()">
+                        <option selected value=""></option>
+                        <option value="all">ALL</option>
+                        <option value="1">>= 1</option>
+                        <option value="2">>= 2</option>
+                        <option value="3">>= 3</option>
+                        <option value="4">>= 4</option>
+                        <option value="5">>= 5</option>
+                    </select>
+                </div>
+            <!-- End Reviews Filter -->
+            
 
                 <div>
                     <div v-if="this.profiles.length > 0">
