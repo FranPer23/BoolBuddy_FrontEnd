@@ -49,7 +49,7 @@ export default {
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav w-50 text-start">
-            <li class="nav-item" v-for="item in menuItems">
+            <li class="nav-item ms_hover" v-for="item in menuItems">
               <router-link
                 :to="{ name: item.routeName }"
                 class="nav-link active"
@@ -64,10 +64,10 @@ export default {
             </li>
           </ul>
           <ul class="navbar-nav d-flex justify-content-end w-50 text-start ">
-            <li class="me-3 ms_pad">
+            <li class="me-3 ms_pad ms_hover">
               <a :href="`${this.store.baseUrl}/login`">Login</a>
             </li>
-            <li class="ms_pad">
+            <li class="ms_pad ms_hover">
               <a :href="`${this.store.baseUrl}/register`">Register</a>
             </li>
           </ul>
@@ -105,6 +105,9 @@ a {
 }
 ul {
   list-style-type: none;
+}
+.ms_hover:hover {
+  transform: scale(1.2);
 }
 
 //media query

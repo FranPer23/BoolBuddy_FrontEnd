@@ -58,6 +58,12 @@
             </div>
         </div>
 
+        <div class="d-flex justify-content-center mb-3">
+            <div>
+                <h6>Reviews: <strong>{{ profile.reviews.length }}</strong> </h6>
+            </div>
+        </div>
+        
         <div class="d-flex justify-content-center">
             <router-link :to="{ name: 'single-profile', params: { id: profile.id } }"
                 class="ms_btn text-center align-self-center">
