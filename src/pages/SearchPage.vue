@@ -86,9 +86,9 @@
             <div v-else class="container">
             
                 <!-- Technologies Filter -->
-                <div class="col-11 d-flex justify-content-center">
-                    <label class="form-label ms-5" for="technology">Technologies</label>
-                    <select v-model="this.store.selectedTechnology" id="technology" class="form-select ms-3"
+                <div class="col-12 text-center py-3">
+                    <label class="form-label " for="technology">Technologies</label>
+                    <select v-model="this.store.selectedTechnology" id="technology" class="form-select w-75 m-auto"
                         @change="getProfiles()">
                         <option selected value=""></option>
                         <option value="all">ALL</option>
@@ -100,9 +100,9 @@
                 <!-- End Technologies Filter -->
 
                 <!-- Votes Filter -->
-                <div class="col-11 d-flex justify-content-center">
-                    <label class="form-label ms-5 my-3" for="averageVote">Average Vote</label>
-                    <select v-model="this.averageVote" id="averageVote" class="form-select ms-3 w-75 my-3"
+                <div class="col-12 text-center py-3">
+                    <label class="form-label" for="averageVote">Average Vote</label>
+                    <select v-model="this.averageVote" id="averageVote" class="form-select w-75 m-auto"
                         @change="getProfiles()">
                         <option selected value=""></option>
                         <option value="all">ALL</option>
@@ -116,9 +116,9 @@
                 <!-- End Votes Filter -->
 
             <!-- Reviews Filter -->
-                <div class="col-11 d-flex justify-content-center">
-                    <label class="form-label ms-5 my-3" for="minReviews">Min number of reviews</label>
-                    <select v-model="this.minReviews" id="minReviews" class="form-select ms-3 w-75 my-3"
+                <div class="col-12 text-center pt-3 pb-5">
+                    <label class="form-label" for="minReviews">Number of Reviews</label>
+                    <select v-model="this.minReviews" id="minReviews" class="form-select w-75 m-auto"
                         @change="getProfiles()">
                         <option selected value=""></option>
                         <option value="all">ALL</option>
@@ -142,7 +142,7 @@
                     </div>
 
                     <div v-else>
-                        <p class="text-center text-uppercase py-3">
+                        <p class="text-center text-uppercase py-3 ms_nomatch">
                             No match for your search
                         </p>
                     </div>
@@ -163,8 +163,9 @@
 
     .bg_div {
         background-color: rgba(0, 0, 0, 0.596);
-        padding-top: 10rem;
+        padding-top: 3rem;
         padding-bottom: 2rem;
+        min-height: 100vh;
     }
 
     main {
@@ -176,6 +177,7 @@
     //LOADING
     .load_container {
         position: relative;
+        height: 100vh;
     }
 
     .ms_loader {
@@ -193,5 +195,11 @@
         display: flex;
         justify-content: center;
         color: white;
+    }
+    .ms_nomatch {
+        color: white;
+        font-size: 3rem;
+        background-color: rgba(255, 255, 255, 0.39);
+        border-radius: 10px;
     }
 </style>

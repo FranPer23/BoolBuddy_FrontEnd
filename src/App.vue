@@ -8,8 +8,10 @@ export default {
 
 <template>
   <AppHeader />
+  <div class="ms_fixed">
 
-  <router-view></router-view>
+    <router-view></router-view>
+  </div>
 </template>
 
 <style lang="scss">
