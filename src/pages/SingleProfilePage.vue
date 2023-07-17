@@ -188,7 +188,7 @@ export default {
               <span v-else></span>
               <i class="fa-solid fa-file mb-4"> CV</i>
               <div v-if="profile.cv">
-                <img :src="cvUrl" alt="" />
+                <img :src="cvUrl" alt="" class="cv"/>
               </div>
               <span v-else></span>
             </div>
@@ -385,11 +385,10 @@ export default {
           <div class="form-container mt-4 p-3">
             <form @submit.prevent="sendVote">
               <div class="card card-body">
-                <div
-                  class="form-container mt-4 p-3 d-flex justify-content-start"
-                >
-                  <span class="mx-3">Vote:</span>
-                  <div v-for="n in 5">
+                <div class="form-container mt-4 p-3 ">
+                  <div class="vote_container">
+                    <span class="mx-3">Vote:</span>
+                    <div v-for="n in 5">
                     <i
                       v-if="n > this.vote"
                       class="fa-regular fa-star me-3 ms_vote"
@@ -409,8 +408,8 @@ export default {
                       @mouseout.prevent="this.mouseOut ? (this.vote = 0) : null"
                     ></i>
                   </div>
-
-                  <div>
+                  </div>
+                  <div class="vote_btn">
                     <button type="submit" class="ms_btn mx-3">Invia</button>
                   </div>
                 </div>
@@ -533,9 +532,72 @@ h2 {
 .ms_vote {
   cursor: pointer;
 }
+.vote_btn {
+  margin-top: 1rem;
+}
+.vote_container {
+  display: flex;
+  justify-content: start;
+
+}
 
 a {
   text-decoration: none;
   color: #0c2230;
 }
+.cv {
+  max-width: 40%;
+}
+
+//media query
+@media screen and (max-width: 991px) {
+  .img_container {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  top: -50px;
+  right: 50%;
+  transform: translate(50%, 0);
+
+  img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid black;
+  }
+  
+}
+.ms_btn {
+  margin-top: 4rem;
+  margin-left: 1rem;
+}
+.ms_card {
+  padding: 1rem;
+}
+h2 {
+  font-size: 2rem;
+}
+
+.profile_info {
+  padding-top: 2rem;
+  font-size: 1.2rem;
+}
+.buttons_container {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.692);
+  width: 80%;
+  margin: 0 auto;
+  display: block;
+  p {
+    margin: 0 auto;
+    button {
+      text-align: center;
+    }
+  }
+}
+   
+}
+
+
 </style>
