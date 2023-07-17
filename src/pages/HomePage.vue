@@ -115,25 +115,38 @@ export default {
 .no-shadow {
   .slide {
     opacity: 0.9;
+    border-radius: 1rem !important;
   }
 
   .vueperslide {
 
     &__title {
-      color: black;
-      font-size: 2rem;
+      color: white;
+      font-size: 1.2rem;
       text-transform: uppercase;
+
     }
 
     &__content {
-      color: black;
-      font-size: 2rem;
+      color: white;
+      font-weight: bold;
+      font-size: 1.2rem;
       text-transform: uppercase;
+      border-radius: 1rem !important;
     }
 
     &__content-wrapper {
       background-color: transparent;
+      background-color: rgba(0, 0, 0, 0.452);
+      border-radius: 1rem;
     }
+
+    .vueperslide {
+      border-radius: 10px !important;
+      background: none;
+      box-shadow: none;
+      border-radius: 1rem !important;
+    }
+
   }
-}
-</style>
+}</style>
