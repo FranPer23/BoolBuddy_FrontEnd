@@ -14,7 +14,7 @@ export default {
 </script>
 
 <template>
-  <footer class="text-white pb-4 pt-3">
+  <footer class="pb-4 pt-3">
     <div class="container">
         <div class="logo-img pb-3">
             <img class="" src="../assets/img/BoolBuddy_logo_definitivo.png" alt=""/>
@@ -45,7 +45,7 @@ export default {
 footer {
     width: 100%;
     // debug
-    background-color: rgba(61, 61, 61, 0.69);
+    background-color: rgba(176, 176, 176, 0.74);
 }
 a {
     text-decoration: none;

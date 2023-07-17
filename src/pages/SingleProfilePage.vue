@@ -136,7 +136,7 @@ export default {
           <div v-if="profile">
             <div class="img_container">
               <div v-if="profile.photo">
-                <img :src="imageUrl" alt="" />
+                <img :src="imageUrl" alt="" class="ms_img"/>
               </div>
               <div v-else>
                 <img src="../assets/defaultimg/profilejpg.jpg" alt="" />
@@ -438,6 +438,9 @@ main {
 
 .form-control {
   background-color: rgba(255, 255, 255, 0.521);
+}
+.ms_img {
+  object-fit: cover;
 }
 //CARD
 
