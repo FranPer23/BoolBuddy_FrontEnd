@@ -31,37 +31,6 @@
 </script>
 
 <template>
-    <!-- <div class="ms_card mb-4">
-    <div class="card-inner">
-      <div class="card-front">
-        <div v-if="profile.photo">
-          <img :src="imageUrl" alt="" />
-        </div>
-        <div v-else>
-          <img src="../assets/defaultimg/profilejpg.jpg" alt="" />
-        </div>
-      </div>
-      <div class="card-back">
-        <div class="ms_card-body mb-4">
-          <h2 class="my-3">{{ profile.surname }} {{ profile.name }}</h2>
-          <h5 class="text-uppercase mb-3">Technologies:</h5>
-          <div class="ms_technology_space">
-            <ul class="list-unstyled flex-wrap">
-              <li v-for="technology in profile.technology" class="col-6">
-                {{ technology.name }}
-              </li>
-            </ul>
-          </div>
-        </div>
-        <router-link :to="{ name: 'single-profile', params: { id: profile.id } }"
-          class="ms_btn text-center align-self-center">
-          Details
-        </router-link>
-      </div>
-    </div>
-  </div> -->
-
-    <!-- prova -->
     <div class="card-client">
         <div class="user-picture">
             <div v-if="profile.photo">
@@ -115,7 +84,7 @@
     // CARD
     .ms_technology_space {
         font-size: 1rem;
-        height: 100px;
+        height: 150px;
     }
 
     .card-client {

@@ -16,8 +16,8 @@ export default {
 <template>
   <footer class="text-white pb-4 pt-3">
     <div class="container">
-        <div class="logo-img">
-            <img class="" src="../assets/img/5.png" alt=""/>
+        <div class="logo-img pb-3">
+            <img class="" src="../assets/img/BoolBuddy_logo_definitivo.png" alt=""/>
         </div>
         <div class="text-center pb-5">BoolBuddy© created by 
             <a href="https://github.com/Giadagenovesi">Giada Genovesi</a>, 
@@ -55,7 +55,7 @@ a {
     font-size: 1.5rem;
 }
 .logo-img {
-    width: 10%;
+    width: 7%;
     margin: auto;
 }
 </style>
