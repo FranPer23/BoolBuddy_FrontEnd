@@ -130,7 +130,7 @@ export default {
         <div class="ms_card">
           <!-- BACK -->
           <router-link :to="{ name: 'search' }" class="ms_btn mb-4">
-            Indietro
+            Back
           </router-link>
           <!-- BACK -->
           <div v-if="profile">
